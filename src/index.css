@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 250 25% 5%;
+    --foreground: 250 10% 95%;
+    --card: 250 20% 8%;
+    --card-foreground: 250 10% 95%;
+    --popover: 250 20% 8%;
+    --popover-foreground: 250 10% 95%;
+    --primary: 280 100% 70%;
+    --primary-foreground: 250 10% 95%;
+    --secondary: 250 15% 12%;
+    --secondary-foreground: 250 10% 80%;
+    --muted: 250 15% 12%;
+    --muted-foreground: 250 8% 60%;
+    --accent: 45 100% 60%;
+    --accent-foreground: 250 10% 5%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 250 10% 95%;
+    --border: 250 15% 20%;
+    --input: 250 15% 20%;
+    --ring: 280 100% 70%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 250 25% 3%;
+    --foreground: 250 10% 98%;
+    --card: 250 20% 6%;
+    --card-foreground: 250 10% 98%;
+    --popover: 250 20% 6%;
+    --popover-foreground: 250 10% 98%;
+    --primary: 280 100% 75%;
+    --primary-foreground: 250 10% 5%;
+    --secondary: 250 15% 10%;
+    --secondary-foreground: 250 10% 85%;
+    --muted: 250 15% 10%;
+    --muted-foreground: 250 8% 65%;
+    --accent: 45 100% 65%;
+    --accent-foreground: 250 10% 5%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 250 10% 98%;
+    --border: 250 15% 15%;
+    --input: 250 15% 15%;
+    --ring: 280 100% 75%;
+  }
+
+  .sunset {
+    --background: 32 100% 98%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 32 100% 98%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 32 100% 98%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 20.5 90.2% 48.2%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20.5 90.2% 48.2%;
+  }
+
+  .ocean {
+    --background: 198 100% 98%;
+    --foreground: 198 14.3% 4.1%;
+    --card: 198 100% 98%;
+    --card-foreground: 198 14.3% 4.1%;
+    --popover: 198 100% 98%;
+    --popover-foreground: 198 14.3% 4.1%;
+    --primary: 199.2 88.6% 48.4%;
+    --primary-foreground: 198 9.1% 97.8%;
+    --secondary: 198 4.8% 95.9%;
+    --secondary-foreground: 198 9.8% 10%;
+    --muted: 198 4.8% 95.9%;
+    --muted-foreground: 198 5.3% 44.7%;
+    --accent: 199.2 88.6% 48.4%;
+    --accent-foreground: 198 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 198 9.1% 97.8%;
+    --border: 198 5.9% 90%;
+    --input: 198 5.9% 90%;
+    --ring: 199.2 88.6% 48.4%;
+  }
+
+  .forest {
+    --background: 150 100% 98%;
+    --foreground: 150 14.3% 4.1%;
+    --card: 150 100% 98%;
+    --card-foreground: 150 14.3% 4.1%;
+    --popover: 150 100% 98%;
+    --popover-foreground: 150 14.3% 4.1%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 150 9.1% 97.8%;
+    --secondary: 150 4.8% 95.9%;
+    --secondary-foreground: 150 9.8% 10%;
+    --muted: 150 4.8% 95.9%;
+    --muted-foreground: 150 5.3% 44.7%;
+    --accent: 142.1 76.2% 36.3%;
+    --accent-foreground: 150 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 150 9.1% 97.8%;
+    --border: 150 5.9% 90%;
+    --input: 150 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+  }
+
+  /* Afrofuturistic Theme - Clay and Purple Tones */
+  .afrofuturistic {
+    --background: 270 45% 12%;
+    --foreground: 30 40% 85%;
+    --card: 270 40% 16%;
+    --card-foreground: 30 40% 85%;
+    --popover: 270 40% 14%;
+    --popover-foreground: 30 40% 85%;
+    --primary: 275 55% 50%;
+    --primary-foreground: 30 35% 95%;
+    --secondary: 20 50% 55%;
+    --secondary-foreground: 270 40% 10%;
+    --accent: 280 60% 45%;
+    --accent-foreground: 30 35% 95%;
+    --muted: 270 35% 22%;
+    --muted-foreground: 30 30% 60%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 30 35% 95%;
+    --border: 275 35% 30%;
+    --input: 270 35% 20%;
+    --ring: 275 55% 50%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Mobile-friendly touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Safe area for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Mobile bottom nav padding */
+  @media (max-width: 767px) {
+    main, .main-content {
+      padding-bottom: 5rem;
+    }
+  }
+}

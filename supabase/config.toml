@@ -1,0 +1,10 @@
+project_id = "hoylwkrhbyoknjcmxigu"
+
+[functions.send-afd-notification]
+verify_jwt = false
+
+[functions.upload-to-ipfs]
+verify_jwt = true
+
+[functions.admin-delete-user]
+verify_jwt = false

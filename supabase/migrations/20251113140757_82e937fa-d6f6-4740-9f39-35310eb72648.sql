@@ -1,0 +1,10 @@
+-- Insert sample films for testing the marketplace
+INSERT INTO films (title, description, director, price, token_id, film_url, genre, year, user_id) VALUES 
+('The Last Dance', 'A powerful documentary about the journey of a young dancer overcoming adversity in Lagos', 'Amara Okafor', '5.99', 1001, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Drama', '2024', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('Echoes of Accra', 'A vibrant exploration of modern life in Ghana''s capital city', 'Kwame Mensah', '4.99', 1002, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Documentary', '2023', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('The Heritage', 'An epic tale connecting past and present through ancient traditions', 'Fatima Hassan', '6.99', 1003, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Historical', '2024', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('Lagos Nights', 'A thriller set against the backdrop of Nigeria''s bustling nightlife', 'Chidi Nwosu', '5.49', 1004, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Thriller', '2023', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('Ubuntu Spirit', 'A heartwarming story about community and connection in South Africa', 'Thandiwe Dlamini', '4.99', 1005, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Drama', '2024', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('Sahara Crossing', 'An adventure film following traders across the desert', 'Omar Al-Rashid', '7.99', 1006, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Adventure', '2023', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('Nollywood Dreams', 'Behind the scenes of Nigeria''s booming film industry', 'Chioma Eze', '5.99', 1007, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Documentary', '2024', 'eeb5d81d-293d-4106-857d-22e60dc7d991'),
+('The Ancestors Call', 'A mystical journey through African spiritual traditions', 'Kofi Asante', '6.49', 1008, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'Fantasy', '2023', 'eeb5d81d-293d-4106-857d-22e60dc7d991');
