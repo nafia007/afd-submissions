@@ -121,18 +121,22 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
     }
   };
 
-  const uploadToStorage = async (file: File, path: string): Promise<string> => {
-    // Check if R2 is configured
-    if (!r2Client.isConfigured()) {
-      throw new Error("Cloudflare R2 storage is not configured");
-    }
+  const uploadToStorage = async (file: File, bucket: string, path: string): Promise<string> => {
+    // Use Supabase storage instead of R2 for now
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload(path, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
 
-    const videoUrl = await r2Client.uploadFile(file, path, {
-      cacheControl: '3600',
-      upsert: false,
-    });
+    if (error) throw error;
 
-    return videoUrl;
+    const { data: urlData } = supabase.storage
+      .from(bucket)
+      .getPublicUrl(data.path);
+
+    return urlData.publicUrl;
   };
 
   const onUrlSubmit = async (values: UrlFormValues) => {
@@ -196,8 +200,8 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
       setUploadStatus("Uploading video...");
       setUploadProgress(10);
 
-      // Upload video to Cloudflare R2
-      const videoUrl = await uploadToStorage(selectedFile, videoPath);
+      // Upload video to Supabase storage (temporary solution)
+      const videoUrl = await uploadToStorage(selectedFile, 'films', videoPath);
       setUploadProgress(70);
 
       // Upload poster if provided
@@ -206,7 +210,7 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
         setUploadStatus("Uploading poster...");
         const posterExtension = posterFile.name.split('.').pop();
         const posterPath = `posters/${sanitizedTitle}_${timestamp}.${posterExtension}`;
-        posterUrl = await uploadToStorage(posterFile, posterPath);
+        posterUrl = await uploadToStorage(posterFile, 'films', posterPath);
       }
       setUploadProgress(90);
 
