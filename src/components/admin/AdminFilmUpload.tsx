@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
+import { r2Client } from "@/integrations/cloudflare-r2/client";
 import { toast } from "sonner";
 import { Upload, Link, Film, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -120,21 +121,18 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
     }
   };
 
-  const uploadToStorage = async (file: File, bucket: string, path: string): Promise<string> => {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-      });
+  const uploadToStorage = async (file: File, path: string): Promise<string> => {
+    // Check if R2 is configured
+    if (!r2Client.isConfigured()) {
+      throw new Error("Cloudflare R2 storage is not configured");
+    }
 
-    if (error) throw error;
+    const videoUrl = await r2Client.uploadFile(file, path, {
+      cacheControl: '3600',
+      upsert: false,
+    });
 
-    const { data: urlData } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(data.path);
-
-    return urlData.publicUrl;
+    return videoUrl;
   };
 
   const onUrlSubmit = async (values: UrlFormValues) => {
@@ -198,8 +196,8 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
       setUploadStatus("Uploading video...");
       setUploadProgress(10);
 
-      // Upload video to films bucket
-      const videoUrl = await uploadToStorage(selectedFile, 'films', videoPath);
+      // Upload video to Cloudflare R2
+      const videoUrl = await uploadToStorage(selectedFile, videoPath);
       setUploadProgress(70);
 
       // Upload poster if provided
@@ -208,7 +206,7 @@ export const AdminFilmUpload = ({ onSuccess }: AdminFilmUploadProps) => {
         setUploadStatus("Uploading poster...");
         const posterExtension = posterFile.name.split('.').pop();
         const posterPath = `posters/${sanitizedTitle}_${timestamp}.${posterExtension}`;
-        posterUrl = await uploadToStorage(posterFile, 'films', posterPath);
+        posterUrl = await uploadToStorage(posterFile, posterPath);
       }
       setUploadProgress(90);
 

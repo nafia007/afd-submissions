@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Play, AlertCircle, ArrowLeft } from "lucide-react";
+import { Play, AlertCircle, ArrowLeft, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface VideoPlayerProps {
   url: string;
@@ -13,6 +15,8 @@ interface VideoPlayerProps {
 const VideoPlayer = ({ url, title }: VideoPlayerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   const isValidVideoUrl = (url: string) => {
     if (!url) return false;
@@ -28,7 +32,9 @@ const VideoPlayer = ({ url, title }: VideoPlayerProps) => {
       /\/ipfs\//,
       /pinata\.cloud/,
       /cloudflare-ipfs\.com/,
-      /dweb\.link/
+      /dweb\.link/,
+      /cloudflarestorage\.com/,
+      /r2\.dev/
     ];
     
     return videoPatterns.some(pattern => pattern.test(url));
@@ -96,14 +102,26 @@ const VideoPlayer = ({ url, title }: VideoPlayerProps) => {
                         url.startsWith('ipfs://') ||
                         url.includes('pinata.cloud') ||
                         url.includes('cloudflare-ipfs.com') ||
-                        url.includes('dweb.link');
+                        url.includes('dweb.link') ||
+                        url.includes('cloudflarestorage.com') ||
+                        url.includes('r2.dev');
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className="w-full gap-2">
-          <Play className="w-4 h-4" />
-          Watch Preview
+        <Button 
+          variant="outline" 
+          className="w-full gap-2"
+          onClick={(e) => {
+            if (!user) {
+              e.preventDefault();
+              navigate('/login');
+            }
+          }}
+          disabled={loading}
+        >
+          {!user ? <LogIn className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+          {!user ? "Login to Watch" : "Watch Preview"}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-4xl">
