@@ -9,7 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
 import { switchToPolygon } from "@/integrations/contracts/filmNFT";
 import { useIsMobile } from "@/hooks/use-mobile";
-import afdLogo from "@/assets/african-filmdao-logo.png";
+import afdLogo from "@/assets/new-logo.png";
 import MobileBottomNav from "./MobileBottomNav";
 const Navigation = () => {
   const [account, setAccount] = useState<string | null>(null);
@@ -87,7 +87,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-40 backdrop-blur-2xl bg-card/30 border-b-2 border-border/50 shadow-lg">
+      <nav className="fixed top-0 left-0 right-0 z-40 backdrop-blur-2xl bg-afd-secondary/90 border-b-2 border-afd-primary/30 shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
@@ -97,18 +97,19 @@ const Navigation = () => {
               
               {/* Desktop Navigation - show on md and above */}
               <div className="hidden md:flex items-center gap-6 ml-8">
-                <Link to="/marketplace" className="text-foreground/80 hover:text-primary transition-colors font-medium">
+                <Link to="/marketplace" className="text-afd-primary/80 hover:text-afd-primary transition-colors font-medium">
                   Marketplace
                 </Link>
-                <Link to="/afd" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-2 font-medium">
+                <Link to="/afd" className="text-afd-primary/80 hover:text-afd-primary transition-colors flex items-center gap-2 font-medium">
                   <Users className="w-4 h-4" />
                   AFD
                 </Link>
-                <a href="https://afd-stream.base44.app/Home" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-lg hover:shadow-primary/30 transition-all px-4 py-2 rounded-xl font-semibold text-sm">
+
+                <a href="https://afd-stream.base44.app/Home" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-afd-primary to-afd-gold text-afd-secondary hover:shadow-lg hover:shadow-afd-primary/30 transition-all px-4 py-2 rounded-xl font-semibold text-sm">
                   AFD Stream beta
                 </a>
                 {isAdmin && (
-                  <Link to="/admin" className="text-foreground/80 hover:text-primary transition-colors font-medium">
+                  <Link to="/admin" className="text-afd-primary/80 hover:text-afd-primary transition-colors font-medium">
                     Admin
                   </Link>
                 )}
@@ -141,11 +142,11 @@ const Navigation = () => {
                       </Button>
                     </Link>
                     {account ? (
-                      <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-sm shadow-md" onClick={disconnectWallet} disabled={loading}>
+                      <Button className="bg-afd-primary text-afd-secondary hover:bg-afd-primary/90 font-semibold text-sm shadow-md" onClick={disconnectWallet} disabled={loading}>
                         {shortenAddress(account)}
                       </Button>
                     ) : (
-                      <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-sm shadow-md" onClick={connectWallet} disabled={loading}>
+                      <Button className="bg-afd-primary text-afd-secondary hover:bg-afd-primary/90 font-semibold text-sm shadow-md" onClick={connectWallet} disabled={loading}>
                         Connect Wallet
                       </Button>
                     )}
@@ -155,15 +156,15 @@ const Navigation = () => {
                     </Button>
                   </>
                 ) : authLoading ? (
-                  <div className="w-8 h-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                  <div className="w-8 h-8 animate-spin rounded-full border-2 border-afd-primary border-t-transparent"></div>
                 ) : (
                   <>
                     <Link to="/login">
-                      <Button variant="outline" size="sm" className="font-semibold">
+                      <Button variant="outline" size="sm" className="font-semibold border-afd-primary text-afd-primary hover:bg-afd-primary hover:text-afd-secondary">
                         Login
                       </Button>
                     </Link>
-                    <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-sm shadow-md" onClick={connectWallet} disabled={loading}>
+                    <Button className="bg-afd-primary text-afd-secondary hover:bg-afd-primary/90 font-semibold text-sm shadow-md" onClick={connectWallet} disabled={loading}>
                       Connect Wallet
                     </Button>
                   </>
