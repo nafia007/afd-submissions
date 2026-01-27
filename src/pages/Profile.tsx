@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { User, Mail, Edit, FileText, Calendar, ExternalLink, BarChart3, ArrowDownUp, Star } from "lucide-react";
+import { User, Mail, Edit, FileText, Calendar, ExternalLink, BarChart3, Star, Wallet, Shield, Globe } from "lucide-react";
 import ProfileInfo from "@/components/profile/ProfileInfo";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -137,9 +137,12 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 pt-20 pb-16">
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Header Section */}
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">Profile</h1>
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Profile
+            </h1>
             {userProfile?.show_in_showcase && (
               <div className="flex items-center gap-2 px-3 py-1 bg-accent/10 rounded-full">
                 <Star className="w-4 h-4 text-accent" />
@@ -148,17 +151,73 @@ const Profile = () => {
             )}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="md:col-span-1">
+          {/* Profile Layout */}
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Left Sidebar */}
+            <div className="md:col-span-1 space-y-6">
               <ProfileInfo 
                 email={user.email}
                 bio={userProfile?.bio}
                 profileImageUrl={userProfile?.profile_image_url}
               />
+
+              {/* Wallet Section */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Wallet className="w-5 h-5 text-primary" />
+                    Wallet Address
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="bg-primary/10 rounded-lg p-3 font-mono text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="text-foreground truncate">
+                        {user.id.slice(0, 6)}...{user.id.slice(-4)}
+                      </span>
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                        <Globe className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    This is your unique identifier for all platform interactions
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Quick Actions */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-primary" />
+                    Quick Actions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <Link to="/voting">
+                    <Button variant="outline" className="w-full text-sm">
+                      View Voting Platform
+                    </Button>
+                  </Link>
+                  <Link to="/assets">
+                    <Button variant="outline" className="w-full text-sm">
+                      Manage Assets
+                    </Button>
+                  </Link>
+                  <Link to="/afd">
+                    <Button variant="outline" className="w-full text-sm">
+                      Submit to AFD
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
             </div>
-            
-            <div className="md:col-span-2 space-y-6">
-              <Card>
+
+            {/* Main Content */}
+            <div className="md:col-span-3 space-y-8">
+              {/* Filmmaker Details */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <User className="w-5 h-5" />
@@ -218,6 +277,7 @@ const Profile = () => {
                 </CardContent>
               </Card>
 
+              {/* Profile Form */}
               {!userProfile && (
                 <ProfileForm 
                   userId={user.id}
@@ -239,129 +299,125 @@ const Profile = () => {
                   initialWebsiteUrl={userProfile.website_url || ""}
                 />
               )}
-            </div>
-          </div>
 
-          {/* AFD Submissions Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="w-5 h-5" />
-                AFD Submissions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {loadingSubmissions ? (
-                <div className="flex items-center justify-center p-6">
-                  <LoadingSpinner size="sm" text="Loading submissions..." />
-                </div>
-              ) : afdSubmissions.length > 0 ? (
-                <div className="space-y-4">
-                  {afdSubmissions.map((submission) => (
-                    <div key={submission.id} className="border rounded-lg p-4 space-y-3">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg">{submission.title}</h3>
-                          {submission.director && (
-                            <p className="text-muted-foreground text-sm">
-                              Director: {submission.director}
-                            </p>
+              {/* AFD Submissions Section */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <FileText className="w-5 h-5" />
+                    AFD Submissions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {loadingSubmissions ? (
+                    <div className="flex items-center justify-center p-6">
+                      <LoadingSpinner size="sm" text="Loading submissions..." />
+                    </div>
+                  ) : afdSubmissions.length > 0 ? (
+                    <div className="space-y-4">
+                      {afdSubmissions.map((submission) => (
+                        <div key={submission.id} className="border border-border/50 rounded-lg p-4 space-y-3">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-lg">{submission.title}</h3>
+                              {submission.director && (
+                                <p className="text-muted-foreground text-sm">
+                                  Director: {submission.director}
+                                </p>
+                              )}
+                            </div>
+                            <Badge variant="outline">
+                              {TIER_LABELS[submission.tier] || submission.tier}
+                            </Badge>
+                          </div>
+                          
+                          {submission.description && (
+                            <p className="text-foreground text-sm">{submission.description}</p>
                           )}
+                          
+                          <div className="flex items-center justify-between pt-2">
+                            <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                              <Calendar className="w-3 h-3" />
+                              {new Date(submission.created_at).toLocaleDateString()}
+                            </div>
+                            <a
+                              href={submission.file_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-1 text-accent hover:underline text-sm"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              {submission.tier === "development" || submission.tier === "finished_script" ? "View Script" : "View Video"}
+                            </a>
+                          </div>
                         </div>
-                        <Badge variant="outline">
-                          {TIER_LABELS[submission.tier] || submission.tier}
-                        </Badge>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/50" />
+                      <p>No AFD submissions yet.</p>
+                      <p className="text-sm mt-2">Your submitted proposals will appear here.</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Assets Section */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5" />
+                    My Assets
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center p-4 border border-border/50 rounded-lg">
+                      <div>
+                        <h4 className="font-medium">Total Asset Value</h4>
+                        <p className="text-muted-foreground text-sm">Across all holdings</p>
                       </div>
-                      
-                      {submission.description && (
-                        <p className="text-foreground text-sm">{submission.description}</p>
-                      )}
-                      
-                      <div className="flex items-center justify-between pt-2">
-                        <div className="flex items-center gap-2 text-muted-foreground text-xs">
-                          <Calendar className="w-3 h-3" />
-                          {new Date(submission.created_at).toLocaleDateString()}
-                        </div>
-                        <a
-                          href={submission.file_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-accent hover:underline text-sm"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          {submission.tier === "development" || submission.tier === "finished_script" ? "View Script" : "View Video"}
-                        </a>
+                      <div className="text-right">
+                        <p className="font-bold text-2xl">$0</p>
+                        <p className="text-sm text-muted-foreground">No assets yet</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">
-                  <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/50" />
-                  <p>No AFD submissions yet.</p>
-                  <p className="text-sm mt-2">Your submitted proposals will appear here.</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                    <Link to="/assets">
+                      <Button variant="outline" className="w-full">
+                        View Asset Dashboard
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
 
-          {/* Assets Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="w-5 h-5" />
-                My Assets
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 border rounded-lg">
-                  <div>
-                    <h4 className="font-medium">Total Asset Value</h4>
-                    <p className="text-muted-foreground text-sm">Across all holdings</p>
+              {/* Voting Section */}
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Star className="w-5 h-5" />
+                    Voting
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-4 border border-border/50 rounded-lg text-center">
+                        <h4 className="font-medium">Votes Cast</h4>
+                        <p className="text-2xl font-bold">0</p>
+                      </div>
+                    </div>
+                    <Link to="/voting">
+                      <Button variant="outline" className="w-full">
+                        View Voting Platform
+                      </Button>
+                    </Link>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold text-2xl">$0</p>
-                    <p className="text-sm text-muted-foreground">No assets yet</p>
-                  </div>
-                </div>
-                <Link to="/assets">
-                  <Button variant="outline" className="w-full">
-                    View Asset Dashboard
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Exchange Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ArrowDownUp className="w-5 h-5" />
-                Trading & Exchange
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 border rounded-lg text-center">
-                    <h4 className="font-medium">Total Trades</h4>
-                    <p className="text-2xl font-bold">0</p>
-                  </div>
-                  <div className="p-4 border rounded-lg text-center">
-                    <h4 className="font-medium">Trading Volume</h4>
-                    <p className="text-2xl font-bold">$0</p>
-                  </div>
-                </div>
-                <Link to="/dex">
-                  <Button variant="outline" className="w-full">
-                    Access Exchange
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -32,16 +32,29 @@ const FilmmakerShowcase = () => {
 
   const fetchShowcaseProfiles = async () => {
     try {
-      // Use the filmmaker_showcase view which already joins the data
-      const { data, error } = await supabase
-        .from('filmmaker_showcase')
+      // Fetch profiles from filmmaker_profiles where show_in_showcase is true
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('filmmaker_profiles')
         .select('*')
+        .eq('show_in_showcase', true)
         .order('updated_at', { ascending: false });
 
-      if (error) throw error;
+      if (profilesError) throw profilesError;
+
+      // Fetch extended profiles data
+      const { data: extendedData, error: extendedError } = await supabase
+        .from('filmmaker_profiles_extended')
+        .select('*');
+
+      if (extendedError) throw extendedError;
+
+      // Create a map of extended profiles by id for quick lookup
+      const extendedProfilesMap = new Map(
+        (extendedData || []).map(profile => [profile.id, profile])
+      );
 
       // Transform the data to match our interface
-      const transformedData = (data || []).map(profile => ({
+      const transformedData = (profilesData || []).map(profile => ({
         id: profile.id || '',
         bio: profile.bio,
         portfolio_url: profile.portfolio_url,
@@ -50,9 +63,9 @@ const FilmmakerShowcase = () => {
         profile_image_url: profile.profile_image_url,
         created_at: profile.created_at || '',
         updated_at: profile.updated_at || '',
-        name: profile.name,
-        role: profile.role,
-        experience: profile.experience
+        name: extendedProfilesMap.get(profile.id)?.name || null,
+        role: extendedProfilesMap.get(profile.id)?.role || null,
+        experience: extendedProfilesMap.get(profile.id)?.experience || null
       }));
       
       setProfiles(transformedData);

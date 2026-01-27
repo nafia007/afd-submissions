@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { allocateVotesToUser } from "@/integrations/supabase/voting";
 
 interface AuthContextType {
   user: User | null;
@@ -45,12 +46,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         if (mounted) {
           console.log("AuthContext > auth event:", event, session?.user?.email);
           setSession(session);
           setUser(session?.user ?? null);
           setLoading(false);
+
+          // Allocate votes when user logs in (non-blocking)
+          if (session?.user && event === 'SIGNED_IN') {
+            // Run in background to not block UI
+            allocateVotesToUser(session.user.id).catch(error => {
+              console.error('Error allocating votes:', error);
+            });
+          }
         }
       }
     );

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, ShoppingBag, Users, Tv, MoreHorizontal, User, Building, LogOut, Wallet } from "lucide-react";
+import { Home, ShoppingBag, Users, Tv, MoreHorizontal, User, Building, LogOut, Wallet, Vote } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -117,6 +117,17 @@ const MobileBottomNav = ({ account, onConnectWallet, onDisconnectWallet, loading
                       <Users className="w-5 h-5 text-secondary-foreground" />
                     </div>
                     <span className="font-medium">Community</span>
+                  </Link>
+
+                  <Link
+                    to="/voting"
+                    onClick={() => setMoreMenuOpen(false)}
+                    className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                      <Vote className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <span className="font-medium">Voting</span>
                   </Link>
 
                   <Link

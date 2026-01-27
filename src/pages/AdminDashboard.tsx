@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
-import { FileText, Users, Upload, BarChart3, Film, TrendingUp, UsersRound } from "lucide-react";
+import { FileText, Users, Upload, BarChart3, Film, TrendingUp, UsersRound, CheckSquare } from "lucide-react";
 import { AdminMetrics } from "@/components/admin/AdminMetrics";
 import { SubmissionReviewCard } from "@/components/admin/SubmissionReviewCard";
 import { UserManagementTable } from "@/components/admin/UserManagementTable";
@@ -18,6 +18,7 @@ import { AdvancedAnalytics } from "@/components/admin/AdvancedAnalytics";
 import { ActivityLog } from "@/components/admin/ActivityLog";
 import { AdminUserMessaging } from "@/components/admin/AdminUserMessaging";
 import { TeamManagement } from "@/components/admin/TeamManagement";
+import AdminVoting from "./AdminVoting";
 
 interface UserProfile {
   id: string;
@@ -179,7 +180,7 @@ const AdminDashboard = () => {
         <AdminMetrics users={users || []} submissions={submissions || []} />
 
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-9">
+          <TabsList className="grid w-full grid-cols-10">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />
               Overview
@@ -215,6 +216,10 @@ const AdminDashboard = () => {
             <TabsTrigger value="users" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               Users
+            </TabsTrigger>
+            <TabsTrigger value="voting" className="flex items-center gap-2">
+              <CheckSquare className="w-4 h-4" />
+              Voting
             </TabsTrigger>
           </TabsList>
 
@@ -398,6 +403,10 @@ const AdminDashboard = () => {
                 <TeamManagement />
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="voting" className="space-y-6">
+            <AdminVoting />
           </TabsContent>
         </Tabs>
       </div>

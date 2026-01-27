@@ -28,6 +28,8 @@ import FilmmakerShowcase from "./pages/FilmmakerShowcase";
 import Install from "./pages/Install";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Voting from "./pages/Voting";
+import AdminVoting from "./pages/AdminVoting";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -65,6 +67,8 @@ const App = () => (
                     <Route path="/afd" element={<AFD />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/voting" element={<AdminVoting />} />
+                    <Route path="/voting" element={<Voting />} />
                     <Route path="/mint-nft" element={<MintNFT />} />
                     <Route path="/showcase" element={<FilmmakerShowcase />} />
                     <Route path="/install" element={<Install />} />

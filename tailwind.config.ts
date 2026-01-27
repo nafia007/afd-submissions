@@ -49,6 +49,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom African Film DAO colors
+        afd: {
+          black: '#0B0B0D',
+          burgundy: '#6B2A2A',
+          gold: '#C9A03F',
+          cream: '#F4F1EA',
+          gray: '#B8B2AA',
+          // New theme colors
+          primary: '#D4AF37', // Gold
+          secondary: '#1A1A1A', // Dark gray/black
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
