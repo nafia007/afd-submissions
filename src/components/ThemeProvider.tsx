@@ -4,7 +4,7 @@
 import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "light" | "dark" | "sunset" | "ocean" | "forest" | "afrofuturistic"
+type Theme = "light" | "dark" | "sunset" | "ocean" | "forest" | "afrofuturistic" | "gold-dark"
 
 interface ThemeProviderProps {
   children: React.ReactNode
@@ -18,11 +18,11 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>("afrofuturistic")
+  const [theme, setTheme] = useState<Theme>("gold-dark")
 
   useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove("light", "dark", "sunset", "ocean", "forest", "afrofuturistic")
+    root.classList.remove("light", "dark", "sunset", "ocean", "forest", "afrofuturistic", "gold-dark")
     root.classList.add(theme)
   }, [theme])
 

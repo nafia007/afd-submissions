@@ -146,6 +146,30 @@
     --ring: 275 55% 50%;
     --radius: 0.5rem;
   }
+
+  /* New Gold & Dark Theme */
+  .gold-dark {
+    --background: 0 0% 10%; /* #1A1A1A */
+    --foreground: 43 74% 90%; /* Lighter gold for better contrast */
+    --card: 0 0% 15%;
+    --card-foreground: 43 74% 90%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 43 74% 90%;
+    --primary: 43 74% 49%; /* #D4AF37 */
+    --primary-foreground: 0 0% 10%; /* #1A1A1A */
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 43 74% 90%;
+    --accent: 43 74% 49%; /* #D4AF37 */
+    --accent-foreground: 0 0% 10%; /* #1A1A1A */
+    --muted: 0 0% 25%;
+    --muted-foreground: 43 74% 80%; /* Lighter muted text */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 43 74% 90%;
+    --border: 43 74% 30%;
+    --input: 0 0% 20%;
+    --ring: 43 74% 49%; /* #D4AF37 */
+    --radius: 0.5rem;
+  }
 }
 
 @layer base {

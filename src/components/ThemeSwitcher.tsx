@@ -1,7 +1,7 @@
 
 import { Button } from "./ui/button";
 import { useTheme } from "./ThemeProvider";
-import { Sun, Moon, Sunset, Waves, Trees, Zap } from "lucide-react";
+import { Sun, Moon, Sunset, Waves, Trees, Zap, Crown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +13,7 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
 
   const themes = [
+    { name: "gold-dark", icon: Crown, label: "Gold & Dark" },
     { name: "afrofuturistic", icon: Zap, label: "Afrofuturistic" },
     { name: "light", icon: Sun, label: "Light" },
     { name: "dark", icon: Moon, label: "Dark" },

@@ -15,9 +15,10 @@ import culturalSovereignty from "@/assets/cultural-sovereignty.png";
 import investorOpportunity from "@/assets/investor-opportunity.png";
 import platformFeatures from "@/assets/platform-features.png";
 import communityCta from "@/assets/community-cta.png";
+import afdLogo from "@/assets/new-logo.png";
 
 const Index = () => {
-  return <div className="min-h-screen relative overflow-hidden bg-background">
+  return <div className="min-h-screen relative overflow-hidden gold-dark">
       {/* Video Background */}
       <div className="fixed inset-0 w-full h-full">
         <video src={afdVideo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
@@ -30,10 +31,9 @@ const Index = () => {
         {/* Hero Content with Glassmorphism */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="backdrop-blur-xl border border-border/50 p-8 md:p-12 shadow-2xl bg-white/0 rounded-none">
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 leading-tight animate-fade-in">
-              African Film DAO
-            </h1>
-            
+            <div className="flex items-center justify-center mb-8">
+              <img src={afdLogo} alt="African Film DAO" className="h-96 w-auto transition-all hover:scale-105" />
+            </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-accent font-semibold mb-8 animate-fade-in">
               Financing the Future of African Cinema
             </h2>
