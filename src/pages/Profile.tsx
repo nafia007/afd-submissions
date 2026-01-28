@@ -120,7 +120,7 @@ const Profile = () => {
 
   if (authLoading || (loadingProfile && loadingSubmissions)) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen gold-dark flex items-center justify-center">
         <LoadingSpinner size="lg" text="Loading profile..." />
       </div>
     );
@@ -128,7 +128,7 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen gold-dark flex items-center justify-center">
         <p>Please log in to view your profile.</p>
       </div>
     );
