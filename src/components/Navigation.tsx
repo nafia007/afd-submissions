@@ -92,7 +92,7 @@ const Navigation = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               <Link to="/" className="flex items-center">
-                <img src={afdLogo} alt="African Film DAO" className="h-12 w-auto transition-all hover:scale-105" />
+                <img src={afdLogo} alt="African Film DAO" className="h-16 w-auto transition-all hover:scale-105" />
               </Link>
               
               {/* Desktop Navigation - show on md and above */}
