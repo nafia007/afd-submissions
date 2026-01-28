@@ -31,8 +31,8 @@ const Index = () => {
         {/* Hero Content with Glassmorphism */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="backdrop-blur-xl border border-border/50 p-8 md:p-12 shadow-2xl bg-white/0 rounded-none">
-            <div className="flex items-center justify-center mb-8">
-              <img src={afdLogo} alt="African Film DAO" className="h-96 w-auto transition-all hover:scale-105" />
+            <div className="flex items-start justify-start mb-8">
+              <img src={afdLogo} alt="African Film DAO" className="h-[40rem] w-auto transition-all hover:scale-105" />
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-accent font-semibold mb-8 animate-fade-in">
               Financing the Future of African Cinema
