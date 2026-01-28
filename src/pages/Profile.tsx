@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -57,14 +57,7 @@ const Profile = () => {
     }
   }, [user, authLoading, navigate]);
 
-  useEffect(() => {
-    if (user && !authLoading) {
-      fetchUserProfile();
-      fetchAfdSubmissions();
-    }
-  }, [user, authLoading]);
-
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
     if (!user) return;
 
     setLoadingProfile(true);
@@ -90,13 +83,14 @@ const Profile = () => {
     } finally {
       setLoadingProfile(false);
     }
-  };
+  }, [user]);
 
-  const fetchAfdSubmissions = async () => {
+  const fetchAfdSubmissions = useCallback(async () => {
     if (!user) return;
 
     setLoadingSubmissions(true);
     try {
+      console.log("Fetching AFD submissions for user:", user.id);
       const { data, error } = await supabase
         .from('afd_submissions')
         .select('*')
@@ -104,19 +98,27 @@ const Profile = () => {
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error fetching AFD submissions:', error);
+        console.error('Error fetching submissions:', error);
         toast.error('Failed to load submissions');
         return;
       }
 
+      console.log("AFD submissions data:", data);
       setAfdSubmissions(data || []);
     } catch (error) {
-      console.error('Error fetching AFD submissions:', error);
+      console.error('Error fetching submissions:', error);
       toast.error('Failed to load submissions');
     } finally {
       setLoadingSubmissions(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user && !authLoading) {
+      fetchUserProfile();
+      fetchAfdSubmissions();
+    }
+  }, [user, authLoading, fetchUserProfile, fetchAfdSubmissions]);
 
   if (authLoading || (loadingProfile && loadingSubmissions)) {
     return (
@@ -125,6 +127,8 @@ const Profile = () => {
       </div>
     );
   }
+
+
 
   if (!user) {
     return (

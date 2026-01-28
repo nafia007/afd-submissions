@@ -15,24 +15,7 @@ export default function Analytics() {
   const { isAdmin, loading } = useAdminCheck();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!loading && !isAdmin) {
-      navigate('/');
-    }
-  }, [isAdmin, loading, navigate]);
-
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 pt-32 pb-16 flex items-center justify-center min-h-[50vh]">
-        <LoadingSpinner size="lg" text="Loading..." />
-      </div>
-    );
-  }
-
-  if (!isAdmin) {
-    return null;
-  }
-  // Fetch real data from Supabase
+  // Fetch real data from Supabase - MUST be called before any early returns
   const { data: assetCount, isLoading: loadingAssets } = useQuery({
     queryKey: ['asset-count'],
     queryFn: async () => {
@@ -95,6 +78,24 @@ export default function Analytics() {
       return data || [];
     }
   });
+
+  useEffect(() => {
+    if (!loading && !isAdmin) {
+      navigate('/');
+    }
+  }, [isAdmin, loading, navigate]);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 pt-32 pb-16 flex items-center justify-center min-h-[50vh]">
+        <LoadingSpinner size="lg" text="Loading..." />
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return null;
+  }
 
   const isLoading = loadingAssets || loadingUsers || loadingFilms || loadingPosts || loadingTransactions || loadingAssetData;
 
