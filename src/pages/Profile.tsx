@@ -135,7 +135,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen gold-dark">
       <div className="container mx-auto px-4 pt-20 pb-16">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header Section */}
@@ -144,9 +144,9 @@ const Profile = () => {
               Profile
             </h1>
             {userProfile?.show_in_showcase && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-accent/10 rounded-full">
-                <Star className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium text-accent">In Showcase</span>
+              <div className="flex items-center gap-2 px-3 py-1 bg-[hsl(43,74%,49%)]/10 rounded-full">
+                <Star className="w-4 h-4 text-[hsl(43,74%,49%)]" />
+                <span className="text-sm font-medium text-[hsl(43,74%,49%)]">In Showcase</span>
               </div>
             )}
           </div>
@@ -162,15 +162,15 @@ const Profile = () => {
               />
 
               {/* Wallet Section */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Wallet className="w-5 h-5 text-primary" />
+                    <Wallet className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     Wallet Address
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-primary/10 rounded-lg p-3 font-mono text-sm">
+                  <div className="bg-[hsl(43,74%,49%)]/10 rounded-lg p-3 font-mono text-sm">
                     <div className="flex items-center justify-between">
                       <span className="text-foreground truncate">
                         {user.id.slice(0, 6)}...{user.id.slice(-4)}
@@ -180,17 +180,17 @@ const Profile = () => {
                       </Button>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-xs text-[hsl(43,74%,80%)] mt-2">
                     This is your unique identifier for all platform interactions
                   </p>
                 </CardContent>
               </Card>
 
               {/* Quick Actions */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-primary" />
+                    <Shield className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     Quick Actions
                   </CardTitle>
                 </CardHeader>
@@ -217,10 +217,10 @@ const Profile = () => {
             {/* Main Content */}
             <div className="md:col-span-3 space-y-8">
               {/* Filmmaker Details */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <User className="w-5 h-5" />
+                    <User className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     Filmmaker Details
                   </CardTitle>
                 </CardHeader>
@@ -253,7 +253,7 @@ const Profile = () => {
                             href={userProfile.portfolio_url} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-accent hover:underline"
+                            className="text-[hsl(43,74%,49%)] hover:underline"
                           >
                             {userProfile.portfolio_url}
                           </a>
@@ -301,10 +301,10 @@ const Profile = () => {
               )}
 
               {/* AFD Submissions Section */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <FileText className="w-5 h-5" />
+                    <FileText className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     AFD Submissions
                   </CardTitle>
                 </CardHeader>
@@ -316,12 +316,12 @@ const Profile = () => {
                   ) : afdSubmissions.length > 0 ? (
                     <div className="space-y-4">
                       {afdSubmissions.map((submission) => (
-                        <div key={submission.id} className="border border-border/50 rounded-lg p-4 space-y-3">
+                        <div key={submission.id} className="border border-[hsl(43,74%,30%)]/50 rounded-lg p-4 space-y-3">
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h3 className="font-semibold text-lg">{submission.title}</h3>
                               {submission.director && (
-                                <p className="text-muted-foreground text-sm">
+                                <p className="text-[hsl(43,74%,80%)] text-sm">
                                   Director: {submission.director}
                                 </p>
                               )}
@@ -336,7 +336,7 @@ const Profile = () => {
                           )}
                           
                           <div className="flex items-center justify-between pt-2">
-                            <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                            <div className="flex items-center gap-2 text-[hsl(43,74%,80%)] text-xs">
                               <Calendar className="w-3 h-3" />
                               {new Date(submission.created_at).toLocaleDateString()}
                             </div>
@@ -344,7 +344,7 @@ const Profile = () => {
                               href={submission.file_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-1 text-accent hover:underline text-sm"
+                              className="flex items-center gap-1 text-[hsl(43,74%,49%)] hover:underline text-sm"
                             >
                               <ExternalLink className="w-3 h-3" />
                               {submission.tier === "development" || submission.tier === "finished_script" ? "View Script" : "View Video"}
@@ -354,8 +354,8 @@ const Profile = () => {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-center py-8 text-muted-foreground">
-                      <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/50" />
+                    <div className="text-center py-8 text-[hsl(43,74%,80%)]">
+                      <FileText className="w-12 h-12 mx-auto mb-4 text-[hsl(43,74%,80%)]/50" />
                       <p>No AFD submissions yet.</p>
                       <p className="text-sm mt-2">Your submitted proposals will appear here.</p>
                     </div>
@@ -364,23 +364,23 @@ const Profile = () => {
               </Card>
 
               {/* Assets Section */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5" />
+                    <BarChart3 className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     My Assets
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center p-4 border border-border/50 rounded-lg">
+                    <div className="flex justify-between items-center p-4 border border-[hsl(43,74%,30%)]/50 rounded-lg">
                       <div>
                         <h4 className="font-medium">Total Asset Value</h4>
-                        <p className="text-muted-foreground text-sm">Across all holdings</p>
+                        <p className="text-[hsl(43,74%,80%)] text-sm">Across all holdings</p>
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-2xl">$0</p>
-                        <p className="text-sm text-muted-foreground">No assets yet</p>
+                        <p className="text-sm text-[hsl(43,74%,80%)]">No assets yet</p>
                       </div>
                     </div>
                     <Link to="/assets">
@@ -393,17 +393,17 @@ const Profile = () => {
               </Card>
 
               {/* Voting Section */}
-              <Card className="backdrop-blur-xl bg-card/40 border-2 border-border/50">
+              <Card className="backdrop-blur-xl bg-card/40 border-2 border-[hsl(43,74%,30%)]/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Star className="w-5 h-5" />
+                    <Star className="w-5 h-5 text-[hsl(43,74%,49%)]" />
                     Voting
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="p-4 border border-border/50 rounded-lg text-center">
+                      <div className="p-4 border border-[hsl(43,74%,30%)]/50 rounded-lg text-center">
                         <h4 className="font-medium">Votes Cast</h4>
                         <p className="text-2xl font-bold">0</p>
                       </div>
